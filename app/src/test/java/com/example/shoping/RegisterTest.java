@@ -43,14 +43,14 @@ public class RegisterTest {
     public void registerValidEmail() throws Exception {
        System.out.println("Start Test Valid Email");
        System.out.println();
-       Assert.assertEquals("True", loginValidator.isValidEmail("gaza19991hotmailcom"));
+       Assert.assertEquals(true, loginValidator.isValidEmail("gaza19991hotmailcom"));
        System.out.println("End Test Valid Email");
     }
 
     @Test
     public void registerValidPassword() throws Exception {
         System.out.println("Start Test Valid Password");
-        Assert.assertEquals("True", loginValidator.isValidPassword("123-123"));
+        Assert.assertEquals(true, loginValidator.isValidPassword("123-123"));
         System.out.println("End Test Valid Password");
     }
 
