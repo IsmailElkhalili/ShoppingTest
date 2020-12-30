@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterValidator {
-    private static final String regexU = "^(.+)&(.+)$";
+    private static final String regexU = "^(.+)-(.+)$";
 
     public String getState(){
 

@@ -25,13 +25,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
-
-    FirebaseUser firebaseUser;
-    DatabaseReference reference;
+    /**
+     * . BottomNavigationView
+     */
+    private BottomNavigationView bottomNavigationView;
+    /**
+     * . FirebaseUser
+     */
+    private FirebaseUser firebaseUser;
+    /**
+     * . DatabaseReference
+     */
+    private DatabaseReference reference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -39,33 +47,36 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView =  findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new HomeFragment()).commit();
 
-//************
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+        firebaseUser = FirebaseAuth
+                .getInstance()
+                .getCurrentUser();
+
+        reference = FirebaseDatabase.getInstance()
+                .getReference("Users")
+                .child(firebaseUser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                if(user==null){
-                    Intent intent=new Intent(MainActivity.this,StartActivity.class);
+                if (user == null) {
+                    Intent intent =
+                            new Intent(MainActivity.this,
+                                    StartActivity.class);
                     finish();
                     startActivity(intent);
                 }
-                //username.setText(user.getUsername());
-               /* if(user.getImageURL().equals("default")){
-                    profile_image.setBackgroundResource(R.mipmap.ic_launcher);
-                }else {
-                    Glide.with(MainActivity.this).load(user.getImageURL()).into(profile_image);
-                }*/
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void
+                onCancelled(@NonNull final DatabaseError databaseError) {
 
             }
         });
@@ -77,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                public boolean
+                onNavigationItemSelected(@NonNull final MenuItem menuItem) {
                     Fragment selectedFragment = null;
-                    switch (menuItem.getItemId()){
+                    switch (menuItem.getItemId()) {
                         case R.id.nav_home:
                             selectedFragment = new HomeFragment();
                             break;
@@ -97,7 +109,9 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container,
+                                    selectedFragment).commit();
                     return true;
                 }
             };

@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class RegisterTest {
     LoginValidator loginValidator;
-
     @Mock
     RegisterValidator registerValidator = mock(RegisterValidator.class);
 
@@ -37,8 +36,7 @@ public class RegisterTest {
         System.out.println("beforeTest");
         loginValidator = new LoginValidator();
     }
-    
-    
+
     @Test(expected =  NullPointerException.class)
     public void registerValidEmail() throws Exception {
        System.out.println("Start Test Valid Email");
@@ -46,22 +44,18 @@ public class RegisterTest {
        Assert.assertEquals(true, loginValidator.isValidEmail("gaza19991hotmailcom"));
        System.out.println("End Test Valid Email");
     }
-
     @Test
     public void registerValidPassword() throws Exception {
         System.out.println("Start Test Valid Password");
         Assert.assertEquals(true, loginValidator.isValidPassword("123-123"));
         System.out.println("End Test Valid Password");
     }
-
-
     @Test(expected =  NullPointerException.class)
     public void registerValidUserName() throws Exception {
         System.out.println("Start Test Valid User Name");
-        assertTrue("True", RegisterValidator.isValidUserName("ismail&ahmed"));
+        Assert.assertEquals(true, RegisterValidator.isValidUserName("ismail&ahmed"));
         System.out.println("End Test Valid User Name");
     }
-
     @Test
     public void registerValidEmailWithMoc()throws Exception{
          when(registerValidator.getState()).thenReturn("true");

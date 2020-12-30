@@ -15,7 +15,7 @@ import java.util.Collection;
 public class LoginTest {
     String emial,password;
     boolean state;
-   static LoginValidator loginValidator;
+    static LoginValidator loginValidator;
 
     public LoginTest(String emial, String password, boolean state) {
         this.emial = emial;
